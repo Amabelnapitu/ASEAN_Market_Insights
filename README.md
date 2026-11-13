@@ -1,6 +1,7 @@
 # ASEAN Market Insights
 
 [![CI](https://github.com/Amabelnapitu/ASEAN_Market_Insights/actions/workflows/ci.yml/badge.svg)](https://github.com/Amabelnapitu/ASEAN_Market_Insights/actions/workflows/ci.yml)
+[![Open the live dashboard](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://aseanmarketinsights-tmfhnjxwb6mia4mx6ik8fp.streamlit.app/)
 
 How have the largest ASEAN banks performed since 2020, and how much of that is explained by
 US equities, US interest rates and global risk appetite?
@@ -49,8 +50,9 @@ reinvested. Full tables are in [`reports/summary.md`](reports/summary.md).
 
 ## Interactive dashboard
 
-`streamlit run app.py` opens a dashboard with a period slider, a bank filter and a
-USD / local-currency switch. Every table and chart recalculates for the selection.
+**[Open the live dashboard](https://aseanmarketinsights-tmfhnjxwb6mia4mx6ik8fp.streamlit.app/)** (no install needed), or run it locally with
+`streamlit run app.py`. It has a period slider, a bank filter and a USD / local-currency
+switch, and every table and chart recalculates for the selection.
 
 ![Dashboard screenshot](reports/figures/app.png)
 
