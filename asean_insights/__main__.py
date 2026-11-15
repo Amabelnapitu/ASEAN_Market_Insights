@@ -3,7 +3,7 @@
 import argparse
 
 from .config import START_DATE
-from .data import load_market_data
+from .data import load_fundamentals, load_market_data
 from .report import write_report
 
 
@@ -16,7 +16,8 @@ def main() -> None:
     args = parser.parse_args()
 
     data = load_market_data(args.start, args.end, refresh=args.refresh)
-    summary = write_report(data, args.out)
+    fundamentals = load_fundamentals(refresh=args.refresh)
+    summary = write_report(data, args.out, fundamentals)
     print(f"Wrote {summary} and figures in {summary.parent / 'figures'}")
 
 
