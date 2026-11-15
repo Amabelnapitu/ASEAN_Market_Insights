@@ -10,7 +10,8 @@ class Bank:
     name: str
     ticker: str  # Yahoo Finance symbol
     country: str
-    fx: str | None  # Yahoo symbol for local currency in USD; None if already quoted in USD
+    fx: str  # Yahoo symbol for the home currency priced in USD
+    adr: bool = False  # True when the ticker is a US-dollar ADR rather than the home listing
 
 
 BANKS = [
@@ -20,9 +21,21 @@ BANKS = [
     Bank("Bank Central Asia", "BBCA.JK", "Indonesia", "IDRUSD=X"),
     Bank("Bank Mandiri", "BMRI.JK", "Indonesia", "IDRUSD=X"),
     Bank("Bangkok Bank", "BBL.BK", "Thailand", "THBUSD=X"),
-    # Yahoo has no usable history for the Manila listing, so BPI uses its US-dollar ADR.
-    Bank("BPI", "BPHLY", "Philippines", None),
+    # Yahoo has no usable history for the Manila listing, so BPI uses its US-dollar ADR. Its
+    # peso price is implied by dividing the ADR by the peso rate.
+    Bank("BPI", "BPHLY", "Philippines", "PHPUSD=X", adr=True),
 ]
+
+# Each country's stock market, as the US-listed iShares ETF (in USD). Yahoo has no usable
+# history for the Thai and Philippine indices, so ETFs keep all five on the same basis.
+# Each bank is itself a sizeable holding of its country's ETF.
+HOME_MARKETS = {
+    "Singapore": "EWS",
+    "Malaysia": "EWM",
+    "Indonesia": "EIDO",
+    "Thailand": "THD",
+    "Philippines": "EPHE",
+}
 
 # Global factors the banks are compared against.
 FACTORS = {
@@ -38,3 +51,4 @@ FACTORS = {
 FRED_SERIES = {"US 10Y": "DGS10", "US 2Y": "DGS2"}
 
 BANK_NAMES = [b.name for b in BANKS]
+COUNTRY_OF = {b.name: b.country for b in BANKS}
